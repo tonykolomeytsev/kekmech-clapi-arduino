@@ -1,6 +1,7 @@
+#ifndef Clapi_h
+#define Clapi_h
 
 #include "Arduino.h"
-
 
 class Api {
 private:
@@ -41,3 +42,5 @@ public:
     void processInput();
     void setMessageListener(void (*listener)(int code, int argsCount, float args[]));
 };
+
+#endif
