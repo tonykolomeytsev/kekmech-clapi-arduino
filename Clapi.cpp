@@ -81,7 +81,7 @@ void Clapi::processInput(void (*listener)(int code, int argsCount, float args[])
     int argsCount = Serial.read();
 
     if (argsCount == 0) {
-        listener(code, argsCount, nullptr);
+        if (listener != NULL) listener(code, argsCount, nullptr);
     } else {
          // количество байт, которое займут аргументы функции
         int bytesToWait = argsCount * 4;
@@ -100,7 +100,7 @@ void Clapi::processInput(void (*listener)(int code, int argsCount, float args[])
             // засовываем расшифрованный double в аргументы
             args[i] = doubleAsBytes.d;
         }
-        listener(code, argsCount, args);
+        if (listener != NULL) listener(code, argsCount, args);
         delete[] args;
     }
 }

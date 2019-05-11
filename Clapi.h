@@ -22,8 +22,8 @@ protected:
 
 public:
     
-    void init() {
-        Serial.begin(115200);
+    void init(int baud_rate = 115200) {
+        Serial.begin(baud_rate);
         Serial.setTimeout(16);
         delay(300);
         initialized = true;
