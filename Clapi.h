@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 
-class Api {
+class Clapi {
 private:
     void (*listener)(int code, int argsCount, float args[]);
 
@@ -22,20 +22,20 @@ protected:
 
 public:
     
-    void init(int baud_rate = 115200) {
-        Serial.begin(baud_rate);
+    void init() {
+        Serial.begin(115200);
         Serial.setTimeout(16);
-        delay(300);
+        delay(50); // для корректной работы
         initialized = true;
     }
 
-    Api* param(const char* key, const char* value);
-    Api* param(const char* key, const int value);
-    Api* param(const char* key, const long value);
-    Api* param(const char* key, const float value);
-    Api* param(const char* key, const double value);
-    Api* param(const char* key, const char value);
-    Api* param(const char* key, const bool value);
+    Clapi* query(const char* key, const char* value);
+    Clapi* query(const char* key, const int value);
+    Clapi* query(const char* key, const long value);
+    Clapi* query(const char* key, const float value);
+    Clapi* query(const char* key, const double value);
+    Clapi* query(const char* key, const char value);
+    Clapi* query(const char* key, const bool value);
     
     void send();
 

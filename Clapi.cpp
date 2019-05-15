@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "Clapi.h"
 
-Api* Clapi::query(const char* key, const char* value) {
+Clapi* Clapi::query(const char* key, const char* value) {
     checkFirstParam();
     Serial.print("\"");
     Serial.print(key);
@@ -11,7 +11,7 @@ Api* Clapi::query(const char* key, const char* value) {
     return this;
 }
 
-Api* Clapi::query(const char* key, const int value) {
+Clapi* Clapi::query(const char* key, const int value) {
     checkFirstParam();
     Serial.print("\"");
     Serial.print(key);
@@ -20,7 +20,7 @@ Api* Clapi::query(const char* key, const int value) {
     return this;
 }
 
-Api* Clapi::query(const char* key, const long value) {
+Clapi* Clapi::query(const char* key, const long value) {
     checkFirstParam();
     Serial.print("\"");
     Serial.print(key);
@@ -29,7 +29,7 @@ Api* Clapi::query(const char* key, const long value) {
     return this;
 }
 
-Api* Clapi::query(const char* key, const float value) {
+Clapi* Clapi::query(const char* key, const float value) {
     checkFirstParam();
     Serial.print("\"");
     Serial.print(key);
@@ -38,7 +38,7 @@ Api* Clapi::query(const char* key, const float value) {
     return this;
 }
 
-Api* Clapi::query(const char* key, const double value) {
+Clapi* Clapi::query(const char* key, const double value) {
     checkFirstParam();
     Serial.print("\"");
     Serial.print(key);
@@ -47,7 +47,7 @@ Api* Clapi::query(const char* key, const double value) {
     return this;
 }
 
-Api* Clapi::query(const char* key, const char value) {
+Clapi* Clapi::query(const char* key, const char value) {
     checkFirstParam();
     Serial.print("\"");
     Serial.print(key);
@@ -57,7 +57,7 @@ Api* Clapi::query(const char* key, const char value) {
     return this;
 }
 
-Api* Clapi::query(const char* key, const bool value) {
+Clapi* Clapi::query(const char* key, const bool value) {
     checkFirstParam();
     Serial.print("\"");
     Serial.print(key);
@@ -71,8 +71,8 @@ void Clapi::send() {
     firstParam = true;
 }
 
-void Clapi::processInput(void (*listener)(int code, int argsCount, float args[])) {
-	if (!Serial.available()) return;
+void Clapi::processInput() {
+	  if (!Serial.available()) return;
     // если не проинициализировались, то ничего не делаем
     if (!initialized) return;
     // когда для чтения становится доступно 2 байта, тогда продолжаем
