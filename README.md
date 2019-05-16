@@ -4,7 +4,7 @@ A library for transferring data between Arduino and Raspberry Pi using Serial.
 
 ## Installing
 
-Download this repo as .zip and add it to Arduino IDE as new library? like any other library.
+Download this repo as .zip and add it to Arduino IDE as new library, like any other library.
 
 ## Features
 
@@ -22,7 +22,7 @@ Raspberry Pi can send multiple float arguments.
 #include <Clapi.h>
 
 // connect to Raspberry Pi via USB
-Clapi *api = new Clapi(CLAPPY_BAUD_115200);
+Clapi *api = new Clapi();
 
 // this function will be launched, when message has arrived
 void listener(int code, int argsCount, float args[]) {
@@ -35,6 +35,9 @@ void setup() {
     api->init(); // don't forget INIT
     // you can use lambda intead function reference
     api->setMessageListener(listener);
+    // sending device name to raspberry 
+    // (only for clapi-raspberry lib v1.0)
+    api->query("device_id", "test")->send();
 }
 
 void loop() {
@@ -52,8 +55,7 @@ Message for raspberry is a JSON.
 JSON sending example:
 
 ```
-api
-    ->query("email", "foo@bar.com")
+api ->query("email", "foo@bar.com")
     ->query("tel", 12345678)
     ->query("is_pressed", false)
     ->send(); // <--- DO NOT FORGET TO WRITE send() !!!
@@ -65,7 +67,7 @@ The code from the example will send the following line to Raspberry Pi:
 {
     "email":"foo@bar.com",
     "tel":12345678,
-    "is_pressed":false,
+    "is_pressed":false
 }
 ```
 
