@@ -71,7 +71,7 @@ The code from the example will send the following line to Raspberry Pi:
 }
 ```
 
-You can transfer **int**, **float**, **string**, **char** and **bool** values. I advise you to look at the sample code in the main.cpp file.
+You can transfer **int**, **float**, **string**, **char** and **bool** values. Check the Basic.ino sketch in examples.
 
 ## License
 
