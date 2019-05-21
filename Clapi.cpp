@@ -66,6 +66,13 @@ Clapi* Clapi::query(const char* key, const bool value) {
     return this;
 }
 
+Clapi* Clapi::response(const int code) {
+    checkFirstParam();
+    Serial.print("\"code\":");
+    Serial.print(code);
+    return this;
+}
+
 void Clapi::send() {
     Serial.println("}");
     firstParam = true;

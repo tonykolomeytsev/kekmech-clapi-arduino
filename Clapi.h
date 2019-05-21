@@ -36,6 +36,7 @@ public:
     Clapi* query(const char* key, const double value);
     Clapi* query(const char* key, const char value);
     Clapi* query(const char* key, const bool value);
+    Clapi* response(const int code);
     
     void send();
 
