@@ -3,6 +3,8 @@
 
 #include "Arduino.h"
 
+#define CMD_HANDSHAKE 0x13
+
 class Clapi {
 private:
     void (*listener)(int code, int argsCount, float args[]);
@@ -28,7 +30,7 @@ public:
         delay(50); // для корректной работы
         initialized = true;
     }
-
+    
     Clapi* query(const char* key, const char* value);
     Clapi* query(const char* key, const int value);
     Clapi* query(const char* key, const long value);
