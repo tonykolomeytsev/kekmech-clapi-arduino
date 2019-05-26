@@ -7,7 +7,8 @@
 
 class Clapi {
 private:
-    void (*listener)(int code, int argsCount, float args[]);
+    void (*listener)(int code, int argsCount, float args[]) = NULL;
+    char* device_id = NULL;
 
 protected:
     bool firstParam = true;
@@ -23,12 +24,17 @@ protected:
     }
 
 public:
-    
+
     void init() {
         Serial.begin(115200);
         Serial.setTimeout(16);
         delay(50); // для корректной работы
         initialized = true;
+    }
+    
+    void init(const char* device_id) {
+        this->device_id = device_id;
+        init();
     }
     
     Clapi* query(const char* key, const char* value);
@@ -44,6 +50,7 @@ public:
 
     void processInput();
     void setMessageListener(void (*listener)(int code, int argsCount, float args[]));
+    void invokeSystemListener(int code, int argsCount, float args[]);
 };
 
 #endif

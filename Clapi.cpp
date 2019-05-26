@@ -88,7 +88,8 @@ void Clapi::processInput() {
     int argsCount = Serial.read();
 
     if (argsCount == 0) {
-        if (listener != NULL) listener(code, argsCount, nullptr);
+        invokeSystemListener(code, argsCount, NULL);
+        if (listener != NULL) listener(code, argsCount, NULL);
     } else {
          // количество байт, которое займут аргументы функции
         int bytesToWait = argsCount * 4;
@@ -107,6 +108,7 @@ void Clapi::processInput() {
             // засовываем расшифрованный double в аргументы
             args[i] = doubleAsBytes.d;
         }
+        invokeSystemListener(code, argsCount, args);
         if (listener != NULL) listener(code, argsCount, args);
         delete[] args;
     }
@@ -115,3 +117,12 @@ void Clapi::processInput() {
 void Clapi::setMessageListener(void (*listener)(int code, int argsCount, float args[])) {
     this->listener = listener;
 }
+
+void Clapi::invokeSystemListener(int code, int argsCount, float args[]) {
+    switch (code) {
+        case CMD_HANDSHAKE:
+            this->query("code", code)->query("device_id", this->device_id)->send();
+            break;
+    }
+}
+
