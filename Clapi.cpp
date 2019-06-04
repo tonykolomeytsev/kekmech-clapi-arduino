@@ -78,6 +78,14 @@ void Clapi::send() {
     firstParam = true;
 }
 
+void Clapi::send(const int code) {
+    checkFirstParam();
+    Serial.print("\"code\":");
+    Serial.print(code);
+    Serial.println("}");
+    firstParam = true;
+}
+
 void Clapi::processInput() {
 	  if (!Serial.available()) return;
     // если не проинициализировались, то ничего не делаем
@@ -88,7 +96,6 @@ void Clapi::processInput() {
     int argsCount = Serial.read();
 
     if (argsCount == 0) {
-        invokeSystemListener(code, argsCount, NULL);
         if (listener != NULL) listener(code, argsCount, NULL);
     } else {
          // количество байт, которое займут аргументы функции
@@ -108,7 +115,6 @@ void Clapi::processInput() {
             // засовываем расшифрованный double в аргументы
             args[i] = doubleAsBytes.d;
         }
-        invokeSystemListener(code, argsCount, args);
         if (listener != NULL) listener(code, argsCount, args);
         delete[] args;
     }
@@ -118,11 +124,4 @@ void Clapi::setMessageListener(void (*listener)(int code, int argsCount, float a
     this->listener = listener;
 }
 
-void Clapi::invokeSystemListener(int code, int argsCount, float args[]) {
-    switch (code) {
-        case CMD_HANDSHAKE:
-            this->query("code", code)->query("device_id", this->device_id)->send();
-            break;
-    }
-}
 

@@ -8,7 +8,6 @@
 class Clapi {
 private:
     void (*listener)(int code, int argsCount, float args[]) = NULL;
-    char* device_id = NULL;
 
 protected:
     bool firstParam = true;
@@ -32,11 +31,6 @@ public:
         initialized = true;
     }
     
-    void init(const char* device_id) {
-        this->device_id = device_id;
-        init();
-    }
-    
     Clapi* query(const char* key, const char* value);
     Clapi* query(const char* key, const int value);
     Clapi* query(const char* key, const long value);
@@ -47,10 +41,10 @@ public:
     Clapi* response(const int code);
     
     void send();
+    void send(const int code);
 
     void processInput();
     void setMessageListener(void (*listener)(int code, int argsCount, float args[]));
-    void invokeSystemListener(int code, int argsCount, float args[]);
 };
 
 #endif
