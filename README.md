@@ -1,6 +1,10 @@
 # Clapi
 
-A library for transferring data between Arduino and Raspberry Pi using Serial.
+The library automates the transfer of data between Arduino and Raspberry, which simplifies the control of a robot or other device built on the basis of one Raspberry and several Arduino.
+
+The main ideology of the library is that Raspberry can send Arduino only commands consisting of an array of bytes (to perform control). Arduino can return any feedback in the form of JSON.
+
+![alt text](https://raw.githubusercontent.com/tonykolomeytsev/kekmech-clapi-arduino/master/img.png)
 
 ## Installing
 
