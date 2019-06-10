@@ -6,6 +6,8 @@ The main ideology of the library is that Raspberry can send Arduino only command
 
 ![alt text](https://raw.githubusercontent.com/tonykolomeytsev/kekmech-clapi-arduino/master/img.png)
 
+Visit the [wiki page](https://github.com/tonykolomeytsev/kekmech-clapi-raspberry/wiki) to understand how it works.
+
 ## Installing
 
 Download this repo as .zip and add it to Arduino IDE as new library, like any other library.
