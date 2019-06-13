@@ -66,6 +66,31 @@ Clapi* Clapi::query(const char* key, const bool value) {
     return this;
 }
 
+
+Clapi* Clapi::query(const char* key, const int array_value[], const int array_size) {
+    Serial.print("\"");
+    Serial.print(key);
+    Serial.print("\":[");
+    for (int i = 0; i < array_size; i++) {
+        if (i > 0) Serial.print(',');
+        Serial.print(array_value[i]);
+    }
+    Serial.print(']');
+    return this;
+}
+
+Clapi* Clapi::query(const char* key, const float array_value[], const int array_size) {
+    Serial.print("\"");
+    Serial.print(key);
+    Serial.print("\":[");
+    for (int i = 0; i < array_size; i++) {
+        if (i > 0) Serial.print(',');
+        Serial.print(array_value[i], 16);
+    }
+    Serial.print(']');
+    return this;
+}
+
 Clapi* Clapi::response(const int code) {
     checkFirstParam();
     Serial.print("\"code\":");
