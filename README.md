@@ -24,7 +24,7 @@ After the Raspberry Pi sends a message, Arduino should process it with Clapi::pr
 
 Raspberry Pi can send multiple float arguments.
 
-```
+```c++
 #include <Clapi.h>
 
 // connect to Raspberry Pi via USB
@@ -60,7 +60,7 @@ Message for raspberry is a JSON.
 
 JSON sending example:
 
-```
+```c++
 api ->query("email", "foo@bar.com")
     ->query("tel", 12345678)
     ->query("is_pressed", false)
@@ -69,7 +69,7 @@ api ->query("email", "foo@bar.com")
 
 The code from the example will send the following line to Raspberry Pi:
 
-```
+```json
 {
     "email":"foo@bar.com",
     "tel":12345678,
